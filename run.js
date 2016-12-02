@@ -1,12 +1,12 @@
 ;(function () {
 	var CONTENT_SELECTOR = 'article.entry-content';
-	var LINK_SELECTOR = 'a[href^="https://github.com"][href$=".md"]';
+	var LINK_SELECTOR = 'a[href^="https://github.com"][href$=".md"], a[href^="/"][href$=".md"]';
 	var EMBED_STYLE = {
 		borderColor: '#4078c0',
 		background: '#fcfcff'
 	};
 
-	var anchors = document.querySelectorAll(CONTENT_SELECTOR + ' ' + LINK_SELECTOR);
+	var anchors = document.querySelector(CONTENT_SELECTOR).querySelectorAll(LINK_SELECTOR);
 	Array.prototype.forEach.call(anchors, function (anchor) {
 		getUrl(anchor.getAttribute('href'), function (err, html) {
 			if (err) {
