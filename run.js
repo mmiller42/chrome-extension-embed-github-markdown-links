@@ -7,7 +7,7 @@
 	};
 
 	var anchors = document.querySelectorAll(CONTENT_SELECTOR + ' ' + LINK_SELECTOR);
-	[].forEach.call(anchors, function (anchor) {
+	Array.prototype.forEach.call(anchors, function (anchor) {
 		getUrl(anchor.getAttribute('href'), function (err, html) {
 			if (err) {
 				throw err;
@@ -19,8 +19,17 @@
 				content.style[prop] = EMBED_STYLE[prop];
 			});
 
+			var close = document.createElement('a');
+			close.innerHTML = '<svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" width="16" height="16"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"></path></svg>';
+			close.className = 'float-right';
+			close.style.cursor = 'pointer';
+			close.addEventListener('click', function () {
+				content.parentNode.removeChild(content);
+			});
+			content.insertBefore(close, content.firstChild);
+
 			var anchorBlock = getClosestBlockAncestor(anchor);
-			anchorBlock.insertAdjacentHTML('afterend', content.outerHTML);
+			anchorBlock.insertAdjacentElement('afterend', content);
 		});
 	});
 
