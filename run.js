@@ -12,7 +12,7 @@
 		return;
 	}
 
-	var anchors = Array.prototype.slice.call(mainContent.querySelectorAll('a[href]'));
+	var anchors = Array.prototype.slice.call(mainContent.querySelectorAll('a[href]')).reverse();
 	anchors = anchors.filter(function (anchor) {
 		var href = anchor.getAttribute('href');
 		if (HREF_REGEX.test(href)) {
@@ -114,7 +114,7 @@
 		tempContainer.className = 'container readme';
 		tempContainer.style.position = 'absolute';
 		tempContainer.style.top = '0';
-		//tempContainer.style.opacity = '0';
+		tempContainer.style.opacity = '0';
 		var innerTempContainer = document.createElement('article');
 		innerTempContainer.className = 'markdown-body entry-content';
 		tempContainer.appendChild(innerTempContainer);
